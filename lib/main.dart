@@ -1,9 +1,6 @@
-// G.Hari Surya Bharadwaj   
-// Lilly Masie
-
-
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+//import 'package:audioplayers/audio_cache.dart';
 import 'dart:math';
 
 void main() {
@@ -17,14 +14,14 @@ class HalloweenGame extends StatefulWidget {
 
 class _HalloweenGameState extends State<HalloweenGame> {
   final AudioPlayer _audioPlayer = AudioPlayer();
+  final AudioCache _audioCache = AudioCache(); // For playing audio from assets
   bool _gameWon = false;
 
   @override
   void initState() {
     super.initState();
     // Start background music and loop
-    _audioPlayer.play('assets/1.mp3', isLocal: true);
-    _audioPlayer.setReleaseMode(ReleaseMode.LOOP);  // Loop background music
+    _audioCache.loop('1.mp3'); // Loop background music
   }
 
   @override
@@ -35,12 +32,12 @@ class _HalloweenGameState extends State<HalloweenGame> {
 
   void _playJumpScare() async {
     // Play jump scare sound
-    await _audioPlayer.play('assets/2.mp3', isLocal: true);
+    await _audioCache.play('2.mp3'); // Play the jump scare sound
   }
 
   void _playSuccessSound() async {
     // Play success sound
-    await _audioPlayer.play('assets/3.mp3', isLocal: true);
+    await _audioCache.play('3.mp3'); // Play the success sound
     setState(() {
       _gameWon = true;
     });
